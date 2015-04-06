@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+        
+        <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+            Overridden: Invoice Workflow
+	 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+        
+        <record id="account.act_open" model="workflow.activity">
+            <field name="wkf_id" ref="account.wkf"/>
+            <field name="name">open</field>
+            <field name="action">button_reset_taxes()
+                action_date_assign()
+                action_create_InvNumber()
+                action_move_create()
+                action_number()
+                invoice_validate()</field>
+            <field name="kind">function</field>
+        </record>
+        
+        <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+            Inherited: Invoice Form View
+	 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+        
+        <record id="at_invoice_form" model="ir.ui.view">
+            <field name="name">at.account.invoice.form</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet/group/group/label[@for='currency_id']" position="before">     
+                    <field name="destination"/>
+                    <field name="vehicle_no"/>
+                    <field name="esugam_no"/>
+                </xpath>
+                
+                <xpath expr="//page[@string='Other Info']/group/group/field[@name='date_due']" position="after">     
+                    <field name="adv_author_no"/>
+                </xpath>
+                
+                <xpath expr="//page[@string='Other Info']/group/group/field[@name='move_id']" position="after">     
+                    <field name="are3_no"/>
+                    <field name="are3_date"/>
+                    <field name="ct3_no"/>
+                    <field name="ct3_date"/>
+                    <field name="amount_in_words" invisible="1"/>
+                </xpath>
+                
+                <xpath expr="//page[@string='Invoice Lines']/field[@name='invoice_line']/tree[@string='Invoice Lines']/field[@name='name']" position="after">
+                    <field name="cetsh"/>
+                </xpath>                
+
+                <xpath expr="//page[@string='Invoice Lines']/field[@name='invoice_line']/tree[@string='Invoice Lines']/field[@name='uos_id']" position="after">
+                    <field name="ctn_box"/>
+                </xpath>
+
+            </field>
+        </record>
+        
+    </data>
+</openerp>
+
+
+
+
+

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+            Inherited: Res Currency Form View
+	 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+        
+        <record id="at_view_currency_form" model="ir.ui.view">
+            <field name="name">at.res.currency.form</field>
+            <field name="model">res.currency</field>
+            <field name="inherit_id" ref="base.view_currency_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form[@string='Currency']/group/group[@string='Miscellaneous']" position="after">
+                    <group string="Currency Numbering">
+                        <field name="number_name"/>
+                        <field name="decimal_name"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+        
+        <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+            Inherited: Product Template Form View
+	 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+        <!-- view specific to product.template -->
+        <record id="at_product_template_only_form_view" model="ir.ui.view">
+            <field name="name">at.product.template.product.form</field>
+            <field name="model">product.template</field>
+            <field name="mode">primary</field>
+            <field name="priority" eval="8" />
+            <field name="inherit_id" ref="product.product_template_only_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@string='Variants']" position="after">
+                    <page string="Technical Data">
+                        <group string="Your Technical Data">
+                            <field name="your_tech_data"/>
+                        </group>
+                        <group string="Our Technical Data">
+                            <field name="our_tech_data"/>
+                        </group>
+                    </page>
+                    
+                </xpath>
+            </field>
+        </record>
+    </data>
+</openerp>
