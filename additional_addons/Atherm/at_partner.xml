@@ -13,11 +13,26 @@
             <field name="inherit_id" ref="base.view_partner_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//sheet/group/group/field[@name='title']" position="after">
-                    <field name="ecc_no"/>
+<!--                    <field name="ecc_no"/>-->
                     <field name="tin_no"/>
                 </xpath>                
                 
+                <xpath expr="//page[@string='Contacts']" position="after">
+                    <page string="Other Information">
+                        <group col="4" colspan="2">
+                            <field name="ecc_no"/>
+                            <field name="range"/>
+                            <field name="division"/>
+                            <field name="commission"/>
+                        </group>
+                    </page>
+                </xpath>
+                
+                
+                
             </field>
         </record>
+        
+                
     </data>
 </openerp>

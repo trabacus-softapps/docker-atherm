@@ -21,3 +21,6 @@ class res_partner(osv.Model):
     
     ecc_no      =   fields.Char(string="ECC NO")
     tin_no      =   fields.Char(string="TIN NO")
+    range       =   fields.Char(string='Range')
+    commission  =   fields.Char(string='Commissionerate')
+    division    =   fields.Char(string='Division')

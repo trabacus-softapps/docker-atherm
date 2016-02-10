@@ -12,12 +12,86 @@
             <field name="inherit_id" ref="sale.view_order_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='partner_id']" position="after">
-                    <field name="contact_id" domain="[('parent_id','=',partner_id)]"/>
+                    <field name="contact_id" domain="[('parent_id','=',partner_id)]"
+                        options='{"no_create": True}'/>
                 </xpath>
                 <xpath expr="//form[@string='Sales Order']/sheet/group/group/field[@name='pricelist_id']" position="after">
                     <field name="dc_type" required="1"/>
                 </xpath>
+                
+                <xpath expr="//field[@name='partner_id']" position="attributes">
+                    <attribute name="options">{"no_create": True}</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='partner_invoice_id']" position="attributes">
+                    <attribute name="options">{'no_create':True}</attribute>
+                </xpath>
+                
+                <xpath expr="//field[@name='partner_shipping_id']" position="attributes">
+                    <attribute name="options">{'no_create':True}</attribute>
+                </xpath>
+                
+                <xpath expr="//field[@name='user_id']" position="attributes">
+                    <attribute name="options">{'no_create':True}</attribute>
+                </xpath>
+                
+                <xpath expr="//field[@name='team_id']" position="attributes">
+                    <attribute name="options">{'no_create':True}</attribute>
+                </xpath>
+                
+                <xpath expr="//field[@name='project_id']" position="attributes">
+                    <attribute name="options">{'no_create':True}</attribute>
+                </xpath>                
+                
+                <field name="pricelist_id" position="attributes">
+                    <attribute name="options">{'no_create': True}</attribute>
+                </field>
+                
+                
+                <xpath expr="//notebook/page[@string='Order Lines']/field[@name='order_line']/form[@string='Sales Order Lines']/group/group/field[@name='product_id']" position="attributes">
+                    <attribute name="options">{'no_create': True}</attribute>
+                </xpath>
+                
+                <xpath expr="//notebook/page[@string='Order Lines']/field[@name='order_line']/form[@string='Sales Order Lines']/group/group/field[@name='tax_id']" position="attributes">
+                    <attribute name="options">{'no_create': True}</attribute>
+                </xpath>              
+                
+
             </field>
         </record>
+        
+        
+        <!--    Sale_stock   -->
+        
+        <record id="at_view_order_form_inherit" model="ir.ui.view">
+            <field name="name">sale.order.form.sale.stock</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale_stock.view_order_form_inherit"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='product_id']" position="attributes">
+                    <attribute name="options">{'no_create' : True}</attribute>
+                </xpath>
+                
+                <xpath expr="//field[@name='address_allotment_id']" position="attributes">
+                    <attribute name="options">{'no_create':True}</attribute>
+                </xpath>
+                
+                <xpath expr="//field[@name='product_packaging']" position="attributes">
+                    <attribute name="options">{'no_create':True}</attribute>
+                </xpath>
+                
+                <xpath expr="//field[@name='product_uom']" position="attributes">
+                    <attribute name="options">{'no_create':True}</attribute>
+                </xpath>
+                
+                <xpath expr="//field[@name='product_uom_qty']" position="attributes">
+                    <attribute name="context">{'partner_id':parent.partner_id, 'quantity':product_uom_qty, 'pricelist':parent.pricelist_id, 'uom':product_uom,'currency_id':currency_id}</attribute>
+                </xpath>
+                
+                
+                
+            </field>
+        </record>
+        
     </data>
 </openerp>
